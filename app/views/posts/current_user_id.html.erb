@@ -1,0 +1,239 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+     
+      <div class="container-fluid">
+       
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+    
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <a class="navbar-brand mt-2 mt-lg-0" href="#">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+              height="15"
+              alt="MDB Logo"
+              loading="lazy"
+            />
+          </a>
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="<%= current_user_id_post_path(@posts, current_user.id) %>">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= posts_path %>">Time Line</a>
+            </li>
+            
+        
+          </ul>
+          <!-- Left links -->
+        </div>
+        <div class="dropdown">
+            <img
+            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+            class="rounded-circle dropdown-toggle " data-bs-toggle='dropdown'
+            height="25"
+            
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
+        
+        <ul
+          class="dropdown-menu "
+          
+        >
+        <% if user_signed_in? %>
+          <li>
+            <a class="dropdown-item" >Hi ,<%= @posts.name%></a>
+          </li>
+          <li>
+            <a class="dropdown-item" href=" <%=  edit_user_registration_path %>"><i class="fa-sharp fa-solid fa-gear"></i> Settings</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="<%=  destroy_user_session_path %>">
+            <i class="fa-sharp fa-solid fa-right-from-bracket"></i> Logout</a>
+          </li>
+        </ul>
+        <%else%>
+        <li>
+            <a class="dropdown-item" >Hi ,<%= @posts.name%></a>
+          </li>
+        <%end%>
+      </div>
+    
+          
+          
+        </div>
+        
+      </div>
+      
+    </nav>
+<section >
+  <div class="container py-5 h-100">
+    
+      <div class="col col-lg-9 col-xl-7">
+      <div>
+          <div >
+          <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+           <div class="modal" id="myModal1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h4 class="modal-title"></h4>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body">
+                    <%= link_to 'Edit profile', edit_user_registration_path %>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          
+         
+          </div>
+            
+               
+                
+                </div>
+                
+                  <div >
+                  
+                  
+                  </div>
+                  
+                  <div class="p-4 text-black" style="background-color: #f8f9fa;">
+                    <div class="card-body p-4 text-black">
+                      <div >
+                        
+                      </div>
+                      <div class="div1">
+                   
+                     <% if @posts.empty? %>
+                  
+                    
+                    <button type="button" class="btn btn-secondary ">
+                      <%= link_to "New Article", new_post_path ,class: 'link-to-text-color' %>
+                     </button>
+                     <%else%>
+                   
+                      <% @posts.each_with_index do |post, index| %>
+                          <div class="card" style=" background-color: 	white; width: 40.5rem;">
+                          <div class="flex-container">
+                          
+                          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                           alt="Generic placeholder image" class="rounded-circle"
+                           style="width: 80px; z-index: 1" >
+                           <%= @posts.name %>
+                           
+                           
+                             
+                           <div class="popup " onclick="myFunction(<%=index%>)">
+                           <% if post.status == "private" %>
+                              <i class="fa-sharp fa-solid fa-lock"></i>
+                              <% end %>
+                           <i class="fa-sharp fa-solid fa-ellipsis " > </i>
+                           <span id="<%= index %>" class="popuptext">
+                           <ul>
+                            <li><i class="fa-sharp fa-solid fa-eye"></i><%= link_to "Edit", edit_post_path(post) %></li>
+                           <li><i class="fa-solid fa-pen-to-square"></i><%= link_to"Show ", post_path(post) %></li>
+                           <li><i class="fa-solid fa-trash"></i><%= link_to "Delete", post_path(post), data: {
+                             turbo_method: :delete,
+                             turbo_confirm: "Are you sure?"
+                           } %></li>
+                           </ul></span>
+                           </div>
+                            </div>
+                           
+                          
+                          </div>
+                          
+                            <div class="position-relative">
+                             <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
+                             alt="image 1" class="w-100 rounded-3">
+                            
+                           
+                             
+                             <div class="position-absolute top-0 start-100 translate-middle">
+                             
+                             
+                              </div>
+                              </div>
+                          <div class="container p-5 my-5 ">
+                          <p>
+                            <%= post.title %></br>
+                            <%= post.description %>
+                            </p>
+                            </div>
+                            </div>
+                            
+                            <%end%>
+                            <% end %>
+                            </div>
+                            
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>                
+      </div>
+    </div>
+  </div>
+</section>  
+                           
+<div class="footer">
+</div>
+  <script>
+// When the user clicks on div, open the popup
+function myFunction(id) {
+  console.log(id)
+  var popup = document.getElementById(id);
+  popup.classList.toggle("show");
+}
+</script>
+ 
+    <div class="fixed-bottom ">
+      <div class="poistion-relative ">
+        <div class="position-absolute  bottom-0 end-0 ">
+          <button type="button" class="btn btn-primary rounded-circle " data-bs-toggle="modal" data-bs-target="#mmyModal">
+            <i class="fa-sharp fa-solid fa-plus-minus"></i>
+          </button>
+       </div>
+      </div>
+    </div>
+    <div class="modal" id="mmyModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <%= link_to "New Article", new_post_path %>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>

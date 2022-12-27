@@ -1,0 +1,29 @@
+<% button_to "#{@current_user.name}",:type => "button", :onclick => "myFunction(this.value)", :remote=>true %><br>
+<button onclick="myFunction()", remote: true>Test</button>
+<p id="demo">hii</p>
+<p>Click me away!</p>
+<p>Click me too!</p>
+<%= @current_user.email %>
+<%= link_to "Hi,#{current_user.email}", edit_user_registration_path %></br>
+<i class="fa-sharp fa-solid fa-user"></i><br/>
+
+
+
+
+3333333333333333
+<nav class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Post</a>
+      </li>
+    </ul> 
+  </div>
+</nav>
+22222222222222222222222222
+<li class="nav-item">
+              <a class="nav-link" href="<%= current_user_id_post_path(@posts, current_user.id) %>">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= posts_path %>">Time Line</a>
+            </li>

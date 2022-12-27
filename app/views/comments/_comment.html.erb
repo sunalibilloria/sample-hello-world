@@ -1,0 +1,14 @@
+
+<li>
+    <%= comment.body %> -
+
+    <%= form_for [comment, Comment.new] do |f| %>
+        <%= f.text_area :body %></br>
+        <%= f.submit "Reply" %>
+        
+    <% end %>
+    
+     <% comment.class.where(commentable_type:"Comment").each do |f| %>
+      <%=f.body%></br>
+      <% end %>
+  </li>

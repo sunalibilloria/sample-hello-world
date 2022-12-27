@@ -1,0 +1,40 @@
+
+<div class="center">
+  <div class="card" style="width: 38rem;">
+  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
+  alt="image 1" class="w-100 rounded-3">
+    <div class="card-body">
+        Title: <%=@post.title %><br/>
+      <div class="position-relative">
+        <div class="position-absolute  bottom-0 end-0">
+        
+          <%= button_to 'Like', post_likes_path(@post), method: :post %>
+        </div>
+      </div>
+        Description: <%= @post.description  %><br/>
+        Status: <%= @post.status  %></br>
+        <p><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+    </div>
+  </div>
+  
+  <h3>Comments</h3>
+  
+  <%= form_for [@post, Comment.new] do |f| %>
+  <%= f.text_area :body %></br>
+  <%= f.submit "Add Comment"  %>
+   <% end %>
+  
+   <ul>
+    <%= render @post.comments %>
+    </ul>
+    
+    
+</div> 
+
+<div class="footer">
+  
+</div>
+ 
+
+  
+ 
